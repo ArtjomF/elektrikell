@@ -1,7 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import { useState } from 'react';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -9,9 +6,14 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 
 
 
-function Header() {
+function Header(props) {
+    
+    const radios = [
+        { name: 'High price', value: '1' },
+        { name: 'Low price', value: '2' },
+      ];
     return (
-        <div>
+        <>
             <Row>
                 <Col><h3>Elektrikell</h3></Col>
             </Row>
@@ -28,8 +30,8 @@ function Header() {
                                 variant={idx % 2 ? 'outline-success' : 'outline-danger'}
                                 name="radio"
                                 value={radio.value}
-                                checked={radioValue === radio.value}
-                                onChange={(e) => setRadioValue(e.currentTarget.value)}
+                                checked={props.radioValue === radio.value}
+                                onChange={(e) => props.setRadioValue(e.currentTarget.value)}
                             >
                                 {radio.name}
                             </ToggleButton>
@@ -38,7 +40,7 @@ function Header() {
                 </Col>
                 <Col>Hind</Col>
             </Row>
-        </div>
+        </>
     )
 };
 
