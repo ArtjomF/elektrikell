@@ -20,6 +20,8 @@ function Low({ hourValue, setHourValue }) {
         { label: '6h', value: '6' },
         { label: '8h', value: '8' },
     ];
+
+    // Objekt sobytija derzit v sebe informaciju o elemente nad kotrym soversheno deistvije
     function handleOnChange(event) {
         const hour = event.currentTarget.value;
         const newDate = new Date().setHours(23 - hour, 59, 59, 999);
@@ -32,7 +34,11 @@ function Low({ hourValue, setHourValue }) {
         setTime(newDate);
         setHourValue(event.currentTarget.value);
     }
-
+    // onChange = triger sobytija.
+    // Sobytie k nam prihodit ot brauzera, a kbrauzeru prihodit ot polzovatelja.
+    //onChhange zapuskajetsja kogda polzovatel sdelal izmenenija v input elementah.(radio button)
+    //onChange zapuskajet funkcii kotryh my nazyvajem obrabotchikami. Vobrabot4ik trigger sobytija otpravljaet sobytija (event)
+    //Triggry sobytij vsegda na4inajetsja s 'on'
     return (
         <>
             <Row>
