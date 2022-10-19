@@ -13,12 +13,12 @@ function Low({ hourValue, setHourValue }) {
     const [time, setTime] = useState(endOfDay);
 
     const cheapHours = [
-        { label: '1h', value: '1' },
-        { label: '2h', value: '2' },
-        { label: '3h', value: '3' },
-        { label: '4h', value: '4' },
-        { label: '6h', value: '6' },
-        { label: '8h', value: '8' },
+        { label: '1h', value: 1 },
+        { label: '2h', value: 2 },
+        { label: '3h', value: 3 },
+        { label: '4h', value: 4 },
+        { label: '6h', value: 6 },
+        { label: '8h', value: 8 },
     ];
     function handleOnChange(event) {
         const hour = event.currentTarget.value;
@@ -30,7 +30,7 @@ function Low({ hourValue, setHourValue }) {
         }
 
         setTime(newDate);
-        setHourValue(event.currentTarget.value);
+        setHourValue(+hour);
     }
 
     return (
