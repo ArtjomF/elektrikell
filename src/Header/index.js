@@ -8,18 +8,17 @@ import ErrorModal from '../ErrorModal';
 
 
 
-function Header(props) {
+function Header({ currentprice, setcurrentPrice, radioValue, setRadioValue }) {
 
-    const [price, setPrice] = useState(0);
     const [showError, setShowError] = useState(false);
-    const [errorMessage, setErrorMessage ] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
 
     useEffect(() => {
         (async function () {
             try {
                 const response = await getCurrentPrice();
-                setPrice(response.data[0].price);
+                setcurrentPrice(response.data[0].price);
             }
             catch (error) {
                 setShowError(true);
@@ -27,7 +26,7 @@ function Header(props) {
             }
         })();
 
-    }, []);
+    }, [setcurrentPrice]);
 
     const radios = [
         { name: 'Low price', value: 'low' },
@@ -35,7 +34,7 @@ function Header(props) {
     ];
     function handleOnChange(event) {
         // event.preventDefault();
-        props.setRadioValue(event.currentTarget.value);
+        setRadioValue(event.currentTarget.value);
 
     }
     return (
@@ -56,7 +55,7 @@ function Header(props) {
                                 variant={idx % 2 ? 'outline-danger' : 'outline-success'}
                                 name="radio"
                                 value={radio.value}
-                                checked={props.radioValue === radio.value}
+                                checked={radioValue === radio.value}
                                 onChange={handleOnChange}
                             >
                                 {radio.name}
@@ -64,9 +63,9 @@ function Header(props) {
                         ))}
                     </ButtonGroup>
                 </Col>
-                <Col>Hind {price}eur /MWh </Col>
+                <Col>Hind {currentprice}eur /MWh </Col>
             </Row>
-            <ErrorModal errorMassage={errorMessage} show={showError} setShow={setShowError}/>
+            <ErrorModal errorMassage={errorMessage} show={showError} setShow={setShowError} />
         </>
     );
 };
