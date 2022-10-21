@@ -48,8 +48,9 @@ function Body({ radioValue, hourValue, setBestTimeRange, setWorstTimeRange }) {
                     return;
 
                 });
+                areaPrices.sort((a, b) => a.result - b.result);
                 if (radioValue === 'low') {
-                    areaPrices.sort((a, b) => a.result - b.result);
+                    
 
                     setBestTimeRange({
                         from: futureData[areaPrices[0].i].x,
