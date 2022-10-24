@@ -9,7 +9,7 @@ import moment from 'moment';
 function Low({ hourValue, setHourValue, bestTimeRange, currentprice }) {
 
     const [showElement, setShowElement] = useState('countdown');
-    const [time, setTime] = useState(new Date());
+    const [time, setTime] = useState(null);
 
     const cheapHours = [
         { label: '1h', value: 1 },
@@ -65,7 +65,7 @@ function Low({ hourValue, setHourValue, bestTimeRange, currentprice }) {
             </Row>
             <Row>
                 <Col>
-                    {showElement === 'countdown' ? <Countdown date={time} /> : <h3>Right now</h3>}
+                    {showElement === 'countdown' && time ? <Countdown date={time} /> : <h3>Right now</h3>}
                 </Col>
             </Row>
             <Row>

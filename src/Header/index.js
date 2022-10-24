@@ -3,17 +3,31 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import { getCurrentPrice } from '../services/apiServices';
 import ErrorModal from '../ErrorModal';
 
 
 
-function Header({ currentprice, setcurrentPrice, radioValue, setRadioValue }) {
+function Header({ 
+    currentprice, 
+    setcurrentPrice, 
+    radioValue, 
+    setRadioValue,
+    selectedCountry,
+    setSelectedCountry,
+}) {
 
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-
+    const countries = [
+        {key: 'ee', title: 'Eesti'},
+        {key: 'fi', title: 'Soome'},
+        {key: 'lv', title: 'Lati'},
+        {key: 'lt', title: 'Leedu'},
+    ]
     useEffect(() => {
         (async function () {
             try {
@@ -32,15 +46,31 @@ function Header({ currentprice, setcurrentPrice, radioValue, setRadioValue }) {
         { name: 'Low price', value: 'low' },
         { name: 'Hight price', value: 'high' },
     ];
-    function handleOnChange(event) {
+    function handleOnChangePrice(event) {
         // event.preventDefault();
         setRadioValue(event.currentTarget.value);
 
+    }
+    function handleOnSelectCountry(key, event) {
+        setSelectedCountry(countries.find(country => country.key === key));
     }
     return (
         <>
             <Row>
                 <Col><h3>Elektrikell</h3></Col>
+                <Col>
+                    <DropdownButton
+                        key="Secondary"
+                        id={`dropdown-variants-secondary`}
+                        variant="secondary"
+                        title={selectedCountry.title}
+                        onSelect={handleOnSelectCountry}
+                    
+                    >
+                        {countries.map(country => <Dropdown.Item key={country.key} eventKey={country.key}>{country.title}</Dropdown.Item>)}
+                      
+                    </DropdownButton>
+                </Col>
             </Row>
             <Row>
                 <Col>Status</Col>
@@ -56,7 +86,7 @@ function Header({ currentprice, setcurrentPrice, radioValue, setRadioValue }) {
                                 name="radio"
                                 value={radio.value}
                                 checked={radioValue === radio.value}
-                                onChange={handleOnChange}
+                                onChange={handleOnChangePrice}
                             >
                                 {radio.name}
                             </ToggleButton>

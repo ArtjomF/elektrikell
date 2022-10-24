@@ -6,11 +6,18 @@ import { getPriceData } from '../services/apiServices';
 import ErrorModal from '../ErrorModal';
 import moment from 'moment';
 
-function Body({ radioValue, hourValue, setBestTimeRange, setWorstTimeRange }) {
+function Body({
+    radioValue,
+    hourValue,
+    setBestTimeRange,
+    setWorstTimeRange,
+    selectedCountry,
+}) {
 
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([null]);
+    const [response, setResponse] = useState(null);
     const [hourNowI, setHourNowI] = useState(0);
     const [x1, setX1] = useState(0);
     const [x2, setX2] = useState(0);
@@ -18,22 +25,25 @@ function Body({ radioValue, hourValue, setBestTimeRange, setWorstTimeRange }) {
     useEffect(() => {
         (async function () {
             try {
-                let priceData = data;
-                if (!priceData.length) {
+                if (!response) {
                     const response = await getPriceData();
-                    priceData = response.data.ee.map(dataObject => {
-                        return {
-                            x: moment.unix(dataObject.timestamp).format('HH'),
-                            y: dataObject.price,
-                            timestamp: dataObject.timestamp,
-                        };
-                    });
-                    setData(priceData);
+                    setResponse(response.data);
+                    return;
                 }
+
+                let priceData = response[selectedCountry.key].map(dataObject => {
+                    return {
+                        x: moment.unix(dataObject.timestamp).format('HH'),
+                        y: dataObject.price,
+                        timestamp: dataObject.timestamp,
+                    };
+                });
+                setData(priceData);
 
                 const hourNowI = priceData.findIndex(dataObject => {
                     return dataObject.x === moment().format('HH');
                 });
+
                 setHourNowI(hourNowI);
                 const futureData = priceData.filter((v, i) => i >= 9);
 
@@ -50,7 +60,7 @@ function Body({ radioValue, hourValue, setBestTimeRange, setWorstTimeRange }) {
                 });
                 areaPrices.sort((a, b) => a.result - b.result);
                 if (radioValue === 'low') {
-                    
+
 
                     setBestTimeRange({
                         from: futureData[areaPrices[0].i].x,
@@ -76,7 +86,7 @@ function Body({ radioValue, hourValue, setBestTimeRange, setWorstTimeRange }) {
                 setErrorMessage(error.message);
             }
         })();
-    }, [hourValue, data, setBestTimeRange, setWorstTimeRange, radioValue]);
+    }, [hourValue, data, setBestTimeRange, setWorstTimeRange, radioValue, selectedCountry, hourNowI, response]);
 
     return (
         <>
