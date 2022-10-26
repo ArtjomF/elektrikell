@@ -16,7 +16,7 @@ function Body({
 
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [data, setData] = useState([null]);
+    const [data, setData] = useState(null);
     const [response, setResponse] = useState(null);
     const [hourNowI, setHourNowI] = useState(0);
     const [x1, setX1] = useState(0);
@@ -38,8 +38,10 @@ function Body({
                         timestamp: dataObject.timestamp,
                     };
                 });
-                setData(priceData);
-
+                if(!data) {
+                    setData(priceData);
+                    return;
+                }
                 const hourNowI = priceData.findIndex(dataObject => {
                     return dataObject.x === moment().format('HH');
                 });

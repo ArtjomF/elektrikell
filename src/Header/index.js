@@ -57,7 +57,7 @@ function Header({
     return (
         <>
             <Row>
-                <Col><h3>Elektrikell</h3></Col>
+            <Col><h1>Elektrikell</h1></Col>
                 <Col>
                     <DropdownButton
                         key="Secondary"
@@ -65,6 +65,7 @@ function Header({
                         variant="secondary"
                         title={selectedCountry.title}
                         onSelect={handleOnSelectCountry}
+                        
                     
                     >
                         {countries.map(country => <Dropdown.Item key={country.key} eventKey={country.key}>{country.title}</Dropdown.Item>)}

@@ -65,7 +65,7 @@ function Low({ hourValue, setHourValue, bestTimeRange, currentprice }) {
             </Row>
             <Row>
                 <Col>
-                    {showElement === 'countdown' && time ? <Countdown date={time} /> : <h3>Right now</h3>}
+                 {showElement === 'countdown' && time ? <Countdown date={time}/> : <h3>Right now</h3>}
                 </Col>
             </Row>
             <Row>
