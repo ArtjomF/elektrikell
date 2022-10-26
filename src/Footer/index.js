@@ -1,14 +1,16 @@
 import Low from "./low";
 import High from "./high";
-
+import './footer.scss';
+import { useSelector } from 'react-redux';
 
 
 function Footer(props) {
+    const radioValue = useSelector ((state) => state.radioValue);
     return (
-        <>
-        {props.radioValue === 'low' ? (<Low {...props} />): 
-        (<High currentprice={props.currentprice} worstTimeRange={props.worstTimeRange}/>)}
-        </>
+        <div id="footer">
+        {radioValue === 'low' ? (<Low {...props} />): 
+        (<High worstTimeRange={props.worstTimeRange}/>)}
+        </div>
     );
 };
 
