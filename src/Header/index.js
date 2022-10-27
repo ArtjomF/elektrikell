@@ -26,7 +26,7 @@ function Header() {
         { key: 'fi', title: 'Soome' },
         { key: 'lv', title: 'Lati' },
         { key: 'lt', title: 'Leedu' },
-    ]
+    ];
 
     useEffect(() => {
         (async function () {
@@ -46,25 +46,28 @@ function Header() {
         { name: 'Low price', value: 'low' },
         { name: 'Hight price', value: 'high' },
     ];
+
     function handleOnChangePrice(event) {
         // event.preventDefault();
         dispatch(setRadioValue(event.currentTarget.value));
 
     }
+
     function handleOnSelectCountry(key, event) {
         dispatch(setSelectedCountry(countries.find(country => country.key === key)));
     }
+
     return (
         <>
-            <Row>
+            <Row className='mt-2'>
                 <Col><h1>Elektrikell</h1></Col>
                 <Col>
                     <DropdownButton
                         key="Secondary"
                         id={`dropdown-variants-secondary`}
                         variant="secondary"
-                        title={selectedCountry.title}
                         onSelect={handleOnSelectCountry}
+                        title={selectedCountry.title}
                         className="float-end"
 
 
@@ -96,9 +99,9 @@ function Header() {
                         ))}
                     </ButtonGroup>
                 </Col>
-                <Col className="text-end">Hind {currentPrice}eur /MWh </Col>
+                <Col className="text-end">Hind {currentPrice}eur /MWh</Col>
             </Row>
-            <ErrorModal errorMassage={errorMessage} show={showError} setShow={setShowError} />
+            <ErrorModal errorMessage={errorMessage} show={showError} setShow={setShowError} />
         </>
     );
 };

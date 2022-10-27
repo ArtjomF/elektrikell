@@ -1,13 +1,11 @@
 import './App.scss';
 import Container from 'react-bootstrap/Container';
-import Header from './Header/index.js';
-import Body from './Body/index.js';
-import Footer from './Footer/index.js';
+import Header from './Header';
+import Body from './Body';
+import Footer from './Footer';
 
 function App() {
-
-  
-  return (
+   return (
 
     <Container>
       <Header/>

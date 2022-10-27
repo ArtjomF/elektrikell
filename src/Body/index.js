@@ -47,9 +47,10 @@ function Body() {
                 });
 
                 setHourNowI(hourNowI);
-                const futureData = priceData.filter((v, i) => i >= 9);
 
+                const futureData = priceData.filter((v, i) => i >= 9);
                 const areaPrices = [];
+
                 futureData.forEach((v, i, arr) => {
                     const partData = arr.slice(i, i + hourValue + 1);
                     if (partData.length === hourValue + 1) {
@@ -62,8 +63,6 @@ function Body() {
                 });
                 areaPrices.sort((a, b) => a.result - b.result);
                 if (radioValue === 'low') {
-
-
                     dispatch(setBestTimeRange({
                         from: futureData[areaPrices[0].i].x,
                         until: futureData[areaPrices[0].i + hourValue].x,
@@ -83,12 +82,13 @@ function Body() {
                 setX1(9 + areaPrices[0].i);
                 const x2 = 9 + areaPrices[0].i + hourValue;
                 setX2(x2);
+
             } catch (error) {
                 setShowError(true);
                 setErrorMessage(error.message);
             }
         })();
-    }, [hourValue, data, dispatch, radioValue, selectedCountry, hourNowI, response]);
+    }, [hourValue, data, dispatch, radioValue, selectedCountry, response]);
 
     return (
         <>
@@ -114,8 +114,8 @@ function Body() {
                             <ReferenceLine x={hourNowI} stroke="red" />
                             {
                                 radioValue === 'low'
-                                    ? <ReferenceArea x1={x1} x2={x2} stroke="green" fill="green" opacity={0.3} />
-                                    : <ReferenceArea x1={x1} x2={x2} stroke="red" fill="red" opacity={0.3} />
+                                    ? <ReferenceArea x1={x1} x2={x2} stroke="green" fill="green" opacity={0.4} />
+                                    : <ReferenceArea x1={x1} x2={x2} stroke="red" fill="red" opacity={0.4} />
 
                             }
 

@@ -11,12 +11,12 @@ import { setHourValue } from '../services/stateService';
 
 
 function Low() {
-
     const [showElement, setShowElement] = useState('countdown');
     const [time, setTime] = useState(null);
     const hourValue = useSelector ((state) => state.hourValue);
     const currentPrice = useSelector((state) => state.currentPrice);
     const bestTimeRange = useSelector((state) => state.bestTimeRange);
+
     const dispatch = useDispatch();
 
     const cheapHours = [
@@ -29,19 +29,19 @@ function Low() {
     ];
 
     useEffect(() => {
-        const countDownUntill = moment.unix(bestTimeRange.timestamp).toDate();
-        setTime(countDownUntill);
+        const countDownUntil = moment.unix(bestTimeRange.timestamp).toDate();
+        setTime(countDownUntil);
     }, [bestTimeRange]);
 
     function handleOnChange(event) {
         const hour = event.currentTarget.value;
 
-        if (bestTimeRange.timestamp > moment().unix()) {
+        if(bestTimeRange.timestamp > moment().unix()) {
             setShowElement('countdown');
         } else {
             setShowElement('right now');
         }
-        dispatch( setHourValue(+hour));
+        dispatch(setHourValue(+hour));
     }
 
     return (
@@ -73,7 +73,7 @@ function Low() {
             </Row>
             <Row>
                 <Col>
-                 {showElement === 'countdown' && time ? <Countdown date={time}/> : <h3>Right now</h3>}
+                 {showElement === 'countdown' && time ? <Countdown date={time}/> : <h3>Right Now!</h3>}
                 </Col>
             </Row>
             <Row>
