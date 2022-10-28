@@ -2,8 +2,8 @@ import moment from 'moment';
 
 const apiUrl = 'https://dashboard.elering.ee/api';
 
-export async function getCurrentPrice() {
-     const country = 'EE';
+export async function getCurrentPrice(selectedCountry) {
+     const country = selectedCountry.key;
      const response = await fetch(`${apiUrl}/nps/price/${country}/current`)
      return response.json();
 };

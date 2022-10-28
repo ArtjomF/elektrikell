@@ -31,7 +31,7 @@ function Header() {
     useEffect(() => {
         (async function () {
             try {
-                const response = await getCurrentPrice();
+                const response = await getCurrentPrice(selectedCountry);
                 dispatch(setcurrentPrice(response.data[0].price));
             }
             catch (error) {
@@ -40,7 +40,7 @@ function Header() {
             }
         })();
 
-    }, [dispatch]);
+    }, [dispatch, selectedCountry]);
 
     const radios = [
         { name: 'Low price', value: 'low' },
