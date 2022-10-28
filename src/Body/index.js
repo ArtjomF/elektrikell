@@ -7,6 +7,8 @@ import ErrorModal from '../ErrorModal';
 import moment from 'moment';
 import { useSelector, useDispatch} from 'react-redux';
 import { setBestTimeRange, setWorstTimeRange } from '../services/stateService';
+import { useLocation } from 'react-router-dom';
+
 
 function Body() {
 
@@ -18,9 +20,10 @@ function Body() {
     const [x1, setX1] = useState(0);
     const [x2, setX2] = useState(0);
     const hourValue = useSelector ((state) => state.hourValue);
-    const radioValue = useSelector ((state) => state.radioValue);
     const selectedCountry = useSelector ((state) => state.selectedCountry);
     const dispatch = useDispatch();
+    const location = useLocation();
+    
 
     useEffect(() => {
         (async function () {
@@ -65,8 +68,10 @@ function Body() {
                     return;
 
                 });
+
                 areaPrices.sort((a, b) => a.result - b.result);
-                if (radioValue === 'low') {
+
+                if (location.pathname.includes('/low') || location.pathname === '/') {
                     dispatch(setBestTimeRange({
                         from: futureData[areaPrices[0].i].x,
                         until: futureData[areaPrices[0].i + hourValue].x,
@@ -92,7 +97,7 @@ function Body() {
                 setErrorMessage(error.message);
             }
         })();
-    }, [hourValue, data, dispatch, radioValue, selectedCountry, response]);
+    }, [hourValue, data, dispatch, selectedCountry, response, location.pathname]);
 
     return (
         <>
@@ -117,7 +122,7 @@ function Body() {
                             <Line type="monotone" dataKey="y" stroke="#8884d8" activeDot={{ r: 8 }} />
                             <ReferenceLine x={hourNowI} stroke="red" />
                             {
-                                radioValue === 'low'
+                                location.pathname.includes('/low') || location.pathname === '/'
                                     ? <ReferenceArea x1={x1} x2={x2} stroke="green" fill="green" opacity={0.4} />
                                     : <ReferenceArea x1={x1} x2={x2} stroke="red" fill="red" opacity={0.4} />
 
