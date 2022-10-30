@@ -1,8 +1,23 @@
 # Getting Started with Create React App
-
+Elektrikell
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Elektrikell is a one-page application for monitoring of electicity prices on the Nord Pool market in real time for four countries (Finland, Estonia, Latvia, Lithuania)
 
+This is an interactive application that allows the user to see prices and choose a interval during the day from one untill 8 hours, lowest or highest prices depence yor preferences.
 ## Available Scripts
+React
+
+React - bootstrap
+
+Redux
+
+React router
+
+Sass
+
+Css
+
+HTML
 
 In the project directory, you can run:
 

@@ -1,9 +1,12 @@
 #footer {
     .btn-group {
         flex-wrap: wrap;
-
+       
         label {
             margin: 0 10px;
+            border-radius: 100%;
+            background-color: rgb(12, 224, 136);
+            border-color: unset;
         }
     }
 }

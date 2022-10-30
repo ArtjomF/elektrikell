@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setcurrentPrice, setSelectedCountry } from '../services/stateService';
 // import { Link } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
+import './header.scss'
 
 
 
@@ -95,7 +96,7 @@ function Header() {
                                 value={radio.value}
                                 checked={location.pathname === radio.value || (idx === 0 && location.pathname === '/')}
                                 onChange={handleOnChangePrice}
-
+                                
                             >
                                 {radio.name}
                             </ToggleButton>

@@ -8,7 +8,7 @@ import moment from 'moment';
 import { useSelector, useDispatch} from 'react-redux';
 import { setBestTimeRange, setWorstTimeRange } from '../services/stateService';
 import { useLocation } from 'react-router-dom';
-
+import './body.scss'
 
 function Body() {
 
@@ -115,7 +115,7 @@ function Body() {
                                 bottom: 5,
                             }}
                         >
-                            <CartesianGrid strokeDasharray="3 3" />
+                            <CartesianGrid strokeDasharray="10 6" />
                             <XAxis dataKey="x" />
                             <YAxis dataKey="y" />
                             <Tooltip />
