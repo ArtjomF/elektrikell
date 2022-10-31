@@ -19,10 +19,19 @@ function Header() {
 
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    //useSelector - hook kotoryi pomogaet nam sledit za redux state i vozvrawaet nam novove zna4enie
+    // useSelector prinimaet funkcijy v kotorom my polu4aem vsjo sostojanie reduxa i vybiraem neohodimoe
+    // useSelector pri neobhodimosti zapuskaet render componenta.
+    //  useSelector lovit
     const currentPrice = useSelector((state) => state.currentPrice);
     const selectedCountry = useSelector((state) => state.selectedCountry);
+    // useDispatch - funkcija otpravki dejstvija/action on prinimaet action kotryi nuzno vypolnit
+    // Eto svjaznoj mezdu komponentom i Reduxom
+    // Dispatch otprovljaet
     const dispatch = useDispatch();
+    // useNavigate eto hook kotoryj dajot nam vozmoznost navigirovat na druguju strani4ku/komponet
     const navigate = useNavigate();
+    // useLocation dajot nam informaciju o dannoj strani4ke/url. dajot nam gde my nahodimsja.
     const location = useLocation();
 
     const countries = [
@@ -36,6 +45,8 @@ function Header() {
         (async function () {
             try {
                 const response = await getCurrentPrice(selectedCountry);
+                // dispatch zapustil action, action v svoju o4ered zapustil Reduser
+                // v Reducer perdalis dannye v objekt action.payload
                 dispatch(setcurrentPrice(response.data[0].price));
             }
             catch (error) {
@@ -53,6 +64,7 @@ function Header() {
 
     function handleOnChangePrice(event) {
         // event.preventDefault();
+        // otpravljet na druguju stranu4ku
         navigate(event.currentTarget.value);
     }
 
@@ -84,7 +96,12 @@ function Header() {
                 <Col>Status</Col>
                <Col className="text-center">
                     {/* <Link to="/high">Show high price</Link>
-                    <Link to="/low">Show low price</Link> */}
+                    <Link to="/low">Show low price</Link> 
+                    // link i useNavigate eto po suti odno i toze
+                    // Link eto komponent kotoryi nas otpravljaet po sylke kotoruju my peredali props to 
+                    useNavigate - hook kotoryi ispolzuem vne Jsx
+                    */}
+                    
                     <ButtonGroup>
                         {radios.map((radio, idx) => (
                             <ToggleButton
