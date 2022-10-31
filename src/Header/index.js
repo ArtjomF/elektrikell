@@ -94,7 +94,7 @@ function Header() {
                                 variant={idx % 2 ? 'outline-danger' : 'outline-success'}
                                 name="radio"
                                 value={radio.value}
-                                checked={location.pathname === radio.value || (idx === 0 && location.pathname === '/')}
+                                checked={location.pathname.includes(radio.value) || (idx === 0 && location.pathname === '/')}
                                 onChange={handleOnChangePrice}
                                 
                             >
