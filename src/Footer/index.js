@@ -12,7 +12,7 @@ function Footer(props) {
                 <Route path="/" element={<Low {...props} />} />
                 <Route path="/low" element={<Low {...props} />} />
                 <Route path="/low/:hours" element={<Low {...props} />} />
-                <Route path="/high" element={<High />} />
+                <Route path="/high/:hours" element={<High />} />
             </Routes>
         </div>
     );
