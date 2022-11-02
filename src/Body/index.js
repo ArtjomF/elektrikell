@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, ReferenceArea } from 'recharts';
-import { getPriceData, handleData } from '../services/apiServices';
+import { getPriceData, handleData, } from '../services/apiServices';
 import ErrorModal from '../ErrorModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { setBestTimeRange, setWorstTimeRange } from '../services/stateService';
@@ -76,7 +76,7 @@ function Body() {
                             <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
                             <ReferenceLine x={data.priceData?.findIndex(d => d.now)} stroke="red" />
                             {
-                                location.pathname.includes('/low') || location.pathname === '/'
+                                location.pathname.includes('/low') || !location.pathname.includes('/high')
                                     ? <ReferenceArea x1={x.x1} x2={x.x2} stroke="green" fill="green" opacity={0.4} />
                                     : <ReferenceArea x1={x.x1} x2={x.x2} stroke="red" fill="red" opacity={0.4} />
 
