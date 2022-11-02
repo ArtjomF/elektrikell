@@ -71,9 +71,9 @@ function Body() {
                         >
                             <CartesianGrid strokeDasharray="10 6" />
                             <XAxis dataKey="x" />
-                            <YAxis dataKey="y" />
+                            <YAxis dataKey="price" />
                             <Tooltip />
-                            <Line type="monotone" dataKey="y" stroke="#8884d8" activeDot={{ r: 8 }} />
+                            <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
                             <ReferenceLine x={data.priceData?.findIndex(d => d.now)} stroke="red" />
                             {
                                 location.pathname.includes('/low') || location.pathname === '/'
